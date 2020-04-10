@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         realPNL
 // @description  real PNL based on "Binance Futures price" itself
-// @version      1.0
+// @version      1.1
 // @author       Hamed Zargaripour
 // @namespace    https://github.com/zargaripour/realPNL
 // @updateURL    https://raw.githubusercontent.com/zargaripour/realPNL/master/realPNL.js
@@ -51,7 +51,7 @@ jQuery( document ).ready(function($) {
     var box =
         '<div id="realPNL">' +
         '<div class="real-border">'+
-        '<div class="real-title">Real PNL (pure profit)</div>'+
+        '<div class="real-title">Real PNL (Pure Profit)</div>'+
         '<div class="real-data">...</div>' +
         '</div>' +
         '</div>';
@@ -71,7 +71,7 @@ jQuery( document ).ready(function($) {
                         var positionPrice = parseFloat(position.filter(':nth-child(13)').text().replace(/,/g, ''));
                         var currentPrice = parseFloat($('.header-pc > div:nth-child(2) > div:nth-child(1) > div:nth-child(3)').text().replace(/,/g, ''));
                         var realPNL_sum = ((currentPrice - positionPrice) * positionSize).toFixed(2);
-                        var realPNL_pure = (realPNL_sum - (Math.abs(currentPrice*positionSize) * 0.0004) - (Math.abs(positionPrice*positionSize) * 0.0004)).toFixed(2);
+                        var realPNL_pure = (realPNL_sum - (Math.abs((currentPrice+positionPrice)*positionSize) * 0.0004)).toFixed(2);
                         $("#realPNL .real-data").text(realPNL_sum + ' (' + realPNL_pure + ')');
                     }
                     else
