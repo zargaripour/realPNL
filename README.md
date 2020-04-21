@@ -26,8 +26,7 @@ that's it. once you have a position on binance futures, the "realPNL" box will b
 *and it will update automaticly...*  
 <br/><br/>
 ## Donation
-*If you're happy for getting more profits, you can make me happy too ;)*  
-*I shared my script with you. if you want, you can share your happiness with me instead ;)*  
+*I shared my code with you for free. If you want, you can share your happiness with me in return ;)*  
 ``` 
 BTC  (BTC)   Address: 1KA7m2KAwJmnKcrEig34aM8jorH6iEYZ3q 
 ```
