@@ -22,7 +22,21 @@ As you may know, commissions depends on many factors like making order, taking o
     * https://raw.githubusercontent.com/zargaripour/realPNL/master/realPNL.js
 4. press "Install"    
 
-that's it. once you have a position on binance futures, the "realPNL" box will be appear.
-
-
-*/\* it will update automaticly... \*/*
+that's it. once you have a position on binance futures, the "realPNL" box will be appear.  
+*and it will update automaticly...*  
+<br/><br/>
+## Donation
+*If you're happy for getting more profits, you can make me happy too ;)*  
+*I shared my script with you. if you want, you can share your happiness with me instead ;)*  
+``` 
+BTC  (BTC)   Address: 1KA7m2KAwJmnKcrEig34aM8jorH6iEYZ3q 
+```
+``` 
+ETH  (ERC20) Address: 0x4d9cb5ecff2ee24d7e56cd6304aa967a1c0d10eb 
+```
+``` 
+USDT (ERC20) Address: 0x4d9cb5ecff2ee24d7e56cd6304aa967a1c0d10eb 
+```
+``` 
+USDT (TRC20) Address: TBNCkyvLFJkH4ZPsfTbjZ3vqSerrAXYsz1 
+```
