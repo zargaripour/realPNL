@@ -13,4 +13,16 @@ If you have a position like this, Your unrealized PNL would be 1810$[mark 1], re
 As you may know, commissions depends on many factors like making order, taking order, BNB level and may other things. Considering all these things needs so many calculations. however, may not have big difference. so we can take top commission, that is 0.04% of each transaction. then you will get "pure profit" or maybe a little bit better.  
 <br/><br/>
 ## Installation
-*/\* will be completed soon... \*/*
+1. Install *Temper Monkey*
+    * Install on [Google Chrome](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo) 
+    * Install on [Firefox](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/) 
+    * Install on [Safari](https://apps.apple.com/us/app/tampermonkey/id1482490089)
+2. in "Tempermonkey" dashboard, go to "Utilities" tab
+3. insert the below link in "Install from URL":   
+    * https://raw.githubusercontent.com/zargaripour/realPNL/master/realPNL.js
+4. press "Install"    
+
+that's it. once you have a position on binance futures, the "realPNL" box will be appear.
+
+
+*/\* it will update automaticly... \*/*
