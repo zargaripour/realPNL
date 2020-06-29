@@ -1,13 +1,15 @@
 // ==UserScript==
 // @name         realPNL
 // @description  real PNL based on "Binance Futures price" itself
-// @version      1.2
+// @version      1.3
 // @author       Hamed Zargaripour
 // @namespace    https://github.com/zargaripour/realPNL
 // @updateURL    https://raw.githubusercontent.com/zargaripour/realPNL/master/realPNL.js
 // @icon         https://bin.bnbstatic.com/static/images/common/favicon.ico
 // @match        https://www.binance.com/*/futures/*
 // @match        https://www.binance.com/*/futuresng/*
+// @match        https://testnet.binancefuture.com/*/futures/*
+// @match        https://testnet.binancefuture.com/*/futuresng/*
 // @require      http://code.jquery.com/jquery-3.4.1.min.js
 // @grant        GM_addStyle
 // @copyright    2020+, zargaripour.com
@@ -21,13 +23,11 @@ GM_addStyle (`
 text-align: center;
 width: 100%;
 }
-
 #realPNL .real-border {
 border: 1px solid #2a2f37;
 display: inline-block;
 margin: 16px;
 }
-
 #realPNL .real-border div {
 background-color: #1b2027;
 padding: 8px 16px;
@@ -35,16 +35,13 @@ margin: 2px;
 min-width: 192px;
 color: #fff;
 }
-
 #realPNL .real-title {
 font-size: 0.9em;
 }
-
 #realPNL .real-data span:nth-child(1) {
 font-weight: normal;
 color: #888;
 }
-
 #realPNL .real-data span:nth-child(2) {
 font-weight: bold;
 }
@@ -54,6 +51,7 @@ font-weight: bold;
 $.noConflict();
 jQuery(document).ready(function ($) {
     var url = window.location.pathname;
+    var hrf = window.location.href;
     var box =
         '<div id="realPNL">' +
         '<div class="real-border">' +
@@ -62,7 +60,7 @@ jQuery(document).ready(function ($) {
         '</div>' +
         '</div>';
 
-    if (url.match('\/futures\/') !== null) {
+    if (hrf.match('version=old') !== null) {
         setInterval(function () {
             if ($(".position-tab").length !== 0) {
                 if ($("#realPNL").length !== 0) {
@@ -84,7 +82,7 @@ jQuery(document).ready(function ($) {
                 }
             }
         }, 1500);
-    } else if (url.match('\/futuresng\/') !== null) {
+    } else if (url.match('\/futures\/') !== null || url.match('\/futuresng\/') !== null) {
         setInterval(function () {
             var position = $(".css-4q7727 .list-grid .css-13rzmoo");
             if (position.length !== 0)
