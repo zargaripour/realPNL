@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         realPNL
 // @description  real PNL based on "Binance Futures price" itself
-// @version      1.4
+// @version      1.5
 // @author       Hamed Zargaripour
 // @namespace    https://github.com/zargaripour/realPNL
 // @updateURL    https://raw.githubusercontent.com/zargaripour/realPNL/master/realPNL.js
@@ -84,7 +84,7 @@ jQuery(document).ready(function ($) {
         }, 1500);
     } else if (url.match('\/futures\/') !== null || url.match('\/futuresng\/') !== null) {
         setInterval(function () {
-            var position = $(".css-4q7727 .list-grid .css-10cf9ck");
+            var position = $(".css-4q7727 .list-grid .css-1az1so7");
             if (position.length !== 0)
             {
                 if ($("#realPNL").length !== 0) {
