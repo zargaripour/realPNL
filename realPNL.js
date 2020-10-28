@@ -8,8 +8,6 @@
 // @icon         https://bin.bnbstatic.com/static/images/common/favicon.ico
 // @match        https://www.binance.com/*/futures/*
 // @match        https://www.binance.com/*/futuresng/*
-// @match        https://testnet.binancefuture.com/*/futures/*
-// @match        https://testnet.binancefuture.com/*/futuresng/*
 // @require      http://code.jquery.com/jquery-3.4.1.min.js
 // @grant        GM_addStyle
 // @copyright    2020+, zargaripour.com
