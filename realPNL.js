@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         realPNL
 // @description  real PNL based on "Binance Futures price" itself
-// @version      1.6
+// @version      1.7
 // @author       Hamed Zargaripour
 // @namespace    https://github.com/zargaripour/realPNL
 // @updateURL    https://raw.githubusercontent.com/zargaripour/realPNL/master/realPNL.js
@@ -36,13 +36,6 @@ color: #fff;
 #realPNL .real-title {
 font-size: 0.9em;
 }
-#realPNL .real-data span:nth-child(1) {
-font-weight: normal;
-color: #888;
-}
-#realPNL .real-data span:nth-child(2) {
-font-weight: bold;
-}
 #realPNL .real-data span {
 font-weight: bold;
 }
@@ -56,8 +49,6 @@ jQuery(document).ready(function ($) {
     var box =
         '<div id="realPNL">' +
         '<div class="real-border">' +
-        //'<div class="real-title">Real PNL (<b>Pure PNL<b>)</div>' +
-        //'<div class="real-data"><span>...</span> <span>(...)</span></div>' +
         '<div class="real-title"><b>Pure Profit<b></div>' +
         '<div class="real-data">...</div>' +
         '</div>' +
@@ -74,12 +65,8 @@ jQuery(document).ready(function ($) {
                         var currentPrice = parseFloat($('.header-pc > div:nth-child(2) > div:nth-child(1) > div:nth-child(3)').text().replace(/,/g, ''));
                         var realPNL_sum = ((currentPrice - positionPrice) * positionSize).toFixed(2);
                         var realPNL_pure = (realPNL_sum - (Math.abs((currentPrice + positionPrice) * positionSize) * 0.0004)).toFixed(2);
-                        //$("#realPNL .real-data span:nth-child(1)").text(realPNL_sum);
-                        //$("#realPNL .real-data span:nth-child(2)").text('(' + realPNL_pure + ')');
                         $("#realPNL .real-data").text(realPNL_pure);
                     } else {
-                        //$("#realPNL .real-data span:nth-child(1)").text('...');
-                        //$("#realPNL .real-data span:nth-child(2)").text('(...)');
                         $("#realPNL .real-data").text('...');
                     }
                 } else {
@@ -100,12 +87,8 @@ jQuery(document).ready(function ($) {
                         var currentPrice = parseFloat($('.showPrice.css-vurnku').text().replace(/,/g, ''));
                         var realPNL_sum = ((currentPrice - positionPrice) * positionSize).toFixed(2);
                         var realPNL_pure = (realPNL_sum - (Math.abs((currentPrice + positionPrice) * positionSize) * 0.0004)).toFixed(2);
-                        //$("#realPNL .real-data span:nth-child(1)").text(realPNL_sum);
-                        //$("#realPNL .real-data span:nth-child(2)").text('(' + realPNL_pure + ')');
                         $("#realPNL .real-data").text(realPNL_pure);
                     } else {
-                        //$("#realPNL .real-data span:nth-child(1)").text('...');
-                        //$("#realPNL .real-data span:nth-child(2)").text('(...)');
                         $("#realPNL .real-data").text('...');
                     }
                 } else {
