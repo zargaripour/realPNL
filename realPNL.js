@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         realPNL
 // @description  real PNL based on "Binance Futures price" itself
-// @version      1.7
+// @version      1.8
 // @author       Hamed Zargaripour
 // @namespace    https://github.com/zargaripour/realPNL
 // @updateURL    https://raw.githubusercontent.com/zargaripour/realPNL/master/realPNL.js
@@ -20,6 +20,7 @@ GM_addStyle (`
 #realPNL {
 text-align: center;
 width: 100%;
+font-size: 1.2em;
 }
 #realPNL .real-border {
 border: 1px solid #2a2f37;
@@ -30,7 +31,7 @@ margin: 16px;
 background-color: #1b2027;
 padding: 8px 16px;
 margin: 2px;
-min-width: 192px;
+min-width: 128px;
 color: #fff;
 }
 #realPNL .real-title {
@@ -54,7 +55,7 @@ jQuery(document).ready(function ($) {
         '</div>' +
         '</div>';
 
-    if (hrf.match('version=old') !== null) {
+    if (url.match('\/legacy\/') !== null) {
         setInterval(function () {
             if ($(".position-tab").length !== 0) {
                 if ($("#realPNL").length !== 0) {
@@ -76,15 +77,14 @@ jQuery(document).ready(function ($) {
         }, 1500);
     } else if (url.match('\/futures\/') !== null || url.match('\/futuresng\/') !== null) {
         setInterval(function () {
-            var position = $(".css-4q7727 .list-grid .css-1ju8iel");
+            var position = $(".css-4q7727 .positionRow");
             if (position.length !== 0)
             {
                 if ($("#realPNL").length !== 0) {
-                    position = position.parent();
                     if (position.children().length > 5) {
-                        var positionSize = parseFloat(position.children().filter(':nth-child(2)').text().replace(/,/g, ''));
-                        var positionPrice = parseFloat(position.children().filter(':nth-child(3)').text().replace(/,/g, ''));
-                        var currentPrice = parseFloat($('.showPrice.css-vurnku').text().replace(/,/g, ''));
+                        var positionSize = parseFloat(position.children().filter('.size').text().replace(/,/g, ''));
+                        var positionPrice = parseFloat(position.children().filter('.entryPrice').text().replace(/,/g, ''));
+                        var currentPrice = parseFloat($('.showPrice').text().replace(/,/g, ''));
                         var realPNL_sum = ((currentPrice - positionPrice) * positionSize).toFixed(2);
                         var realPNL_pure = (realPNL_sum - (Math.abs((currentPrice + positionPrice) * positionSize) * 0.0004)).toFixed(2);
                         $("#realPNL .real-data").text(realPNL_pure);
@@ -92,7 +92,7 @@ jQuery(document).ready(function ($) {
                         $("#realPNL .real-data").text('...');
                     }
                 } else {
-                    $("div").parent(".css-4q7727 .list-grid").append(box);
+                    position.parents().eq(2).append(box);
                 }
             }
         }, 1500);
