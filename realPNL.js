@@ -1,13 +1,14 @@
 // ==UserScript==
 // @name         realPNL
 // @description  real PNL based on "Binance Futures price" itself
-// @version      2.2
+// @version      3.0
 // @author       Hamed Zargaripour
 // @namespace    https://github.com/zargaripour/realPNL
 // @updateURL    https://raw.githubusercontent.com/zargaripour/realPNL/master/realPNL.js
 // @icon         https://bin.bnbstatic.com/static/images/common/favicon.ico
 // @match        https://www.binance.com/*/futures/*
 // @match        https://www.binance.com/*/futuresng/*
+// @match        https://testnet.binancefuture.com/*/futures/*
 // @require      http://code.jquery.com/jquery-3.4.1.min.js
 // @grant        GM_addStyle
 // @copyright    2020+, zargaripour.com
@@ -69,8 +70,9 @@ jQuery(document).ready(function ($) {
 
     if (url.match('\/futures\/') !== null || url.match('\/futuresng\/') !== null) {
         setInterval(function () {
-            var position = $(".positionRow.body");
-            if (position.length !== 0) {
+            var position = $(".list-item-container").parent();
+            if (position.children().length !== 0) {
+
                 if ($("#realPNL").length !== 0) {
                     var long = false;
                     var short = false;
@@ -81,37 +83,38 @@ jQuery(document).ready(function ($) {
                     var realPNL_sum = null;
                     var realPNL_pure = null;
 
-                    if($('.positionRow.body').children().filter('.size.size-sell').length > 0)
-                    {
-                        item = position.children().filter('.size.size-sell').parent();
-                        positionSize = parseFloat(item.children().filter('.size').text().replace(/,/g, ''));
-                        positionPrice = parseFloat(item.children().filter('.entryPrice').text().replace(/,/g, ''));
-                        currentPrice = parseFloat($('.contractPrice').text().replace(/,/g, ''));
-                        realPNL_sum = ((currentPrice - positionPrice) * positionSize).toFixed(2);
-                        realPNL_pure = (realPNL_sum - (Math.abs((currentPrice + positionPrice) * positionSize) * 0.0004)).toFixed(2);
-                        $("#realPNL .real-data.shortdata").text(realPNL_pure);
-                        short = true;
-                    }
-                    if($('.positionRow.body').children().filter('.size.size-buy').length > 0)
-                    {
-                        item = position.children().filter('.size.size-buy').parent();
-                        positionSize = parseFloat(item.children().filter('.size').text().replace(/,/g, ''));
-                        positionPrice = parseFloat(item.children().filter('.entryPrice').text().replace(/,/g, ''));
-                        currentPrice = parseFloat($('.contractPrice').text().replace(/,/g, ''));
-                        realPNL_sum = ((currentPrice - positionPrice) * positionSize).toFixed(2);
-                        realPNL_pure = (realPNL_sum - (Math.abs((currentPrice + positionPrice) * positionSize) * 0.0004)).toFixed(2);
-                        $("#realPNL .real-data.longdata").text(realPNL_pure);
-                        long = true;
-                    }
+                    var symbol = $("h1").first().text().replace(/\s/g,'');
 
-                    if(long == false)
-                    {
-                        $("#realPNL .real-data.longdata").html('<b class="longside">...<b>');
-                    }
-                    if(short == false)
-                    {
-                        $("#realPNL .real-data.shortdata").html('<b class="shortside">...<b>');
-                    }
+                    position.children().each(function () {
+                        if($(this).find('.symbol .pair').text() == symbol)
+                        {
+                            positionSize = parseFloat($(this).find('.size').text().replace(/,/g, ''));
+                            positionPrice = parseFloat($(this).find('.entryPrice').text().replace(/,/g, ''));
+                            currentPrice = parseFloat($(this).find('.markPrice').text().replace(/,/g, ''));
+                            realPNL_sum = ((currentPrice - positionPrice) * positionSize).toFixed(2);
+                            realPNL_pure = (realPNL_sum - (Math.abs((currentPrice + positionPrice) * positionSize) * 0.0004)).toFixed(2);
+
+                            if($(this).find('.size-sell').length > 0)
+                            {
+                                $("#realPNL .real-data.shortdata").text(realPNL_pure);
+                                short = true;
+                            }
+                            if($(this).find('.size-buy').length > 0)
+                            {
+                                $("#realPNL .real-data.longdata").text(realPNL_pure);
+                                long = true;
+                            }
+
+                            if(long == false)
+                            {
+                                $("#realPNL .real-data.longdata").html('<b class="longside">...<b>');
+                            }
+                            if(short == false)
+                            {
+                                $("#realPNL .real-data.shortdata").html('<b class="shortside">...<b>');
+                            }
+                        }
+                    });
                 } else {
                     $(".css-1p1znp9").append(box);
                 }
